@@ -1,0 +1,92 @@
+<nav class="navbar"  class="  text-white p-3" style="background-color: #0a4275;">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">
+      <img src="https://w7.pngwing.com/pngs/98/991/png-transparent-computer-icons-bank-icon-design-screenshot-bank-blue-angle-logo.png" alt="Logo" width="60" height="50" class="d-inline-block align-text-top">
+      HSFC Bank
+    </a>
+  </div>
+</nav>
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <!-- image -->
+            <img height="530px" src="https://img.freepik.com/free-vector/access-control-system-abstract-concept_335657-3180.jpg?w=360" alt="">
+        </div>
+        <div class="col-6">
+            <!-- login form -->
+           <form [formGroup]="loginForm" class="border rounded shadow p-5 m-5" (ngSubmit)="login()"> 
+            <h3 class="text-center text-primary" >Login here</h3>
+        
+            <div class="form-floating mb-3">
+                <input type="text" name="acno" formControlName="acno" class="form-control" placeholder="Account Number:4589894556">
+                <!-- to show invalid  -->
+                <div *ngIf="this.loginForm.get('acno')?.errors && this.loginForm.get('acno')?.touched" class="text-danger">Invalid Account number</div>
+                <label>Account Number</label>
+              </div>
+
+
+              <div class="form-floating">
+                <input type="password" name="password" formControlName="password" class="form-control"  placeholder="Password">
+                <!-- to show invalid  -->
+                <div *ngIf="this.loginForm.get('password')?.errors && this.loginForm.get('password')?.touched" class="text-danger">Invalid Password</div>
+                <label>Password</label>
+              </div>
+
+              <div class="mt-2 text-danger fw-bolder text-center">
+              {{loginErrMsg}}
+              </div>
+              
+              <div class="d-grid my-4">
+                <button class="btn btn-primary">Sign In
+                  <!-- spinner -->
+                  <div *ngIf="loginSuccessMsg" class="spinner-border text-info ms-2" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </button>
+              </div>
+             
+            <div>
+                <a routerLink="register">New to here? Please Sign up</a>
+            </div>
+
+           </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- footer -->
+
+
+<section class="">
+  <!-- Footer -->
+  <footer class="text-center text-white" style="background-color: #0a4275;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: CTA -->
+      <section class="">
+        <p class="d-flex justify-content-center align-items-center">
+          <span class="me-3">Register for free</span>
+          <button routerLink="/register" type="button" class="btn btn-outline-light btn-rounded">
+            Sign up!
+          </button>
+        </p>
+      </section>
+      <!-- Section: CTA -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2023 Copyright:
+      <a class="text-white" href="#">HSFC.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</section>

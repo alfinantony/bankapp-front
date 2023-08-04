@@ -1,0 +1,61 @@
+
+
+
+                            Bank-App
+
+        1; Create a App - ng new Bank-App
+        2: cd Bank-App
+        3: code .
+        4: clear all code in html 
+        5: Includes 3rd party libraries - Bootstrap , font awesome , google font
+           In index.html
+        6: Create a components
+            1} login - ng g c login
+            2} registration - ng g c registration
+            3} dashboard - ng g c dashboard
+            4} transaction - ng g c transaction
+            5} pageNotFound - ng g c pageNotFound
+            6} footer - ng g c footer                       
+            6} header - ng g c header    
+        7: Setup the path for each components in app-routing module.ts
+        8: Use router-outlet selector in app.component.html
+        9: Design login registration page.
+        10: Setup validation for form
+
+        Angular Form : Model Driven form
+        eg: Reactive Forms : we can add validations easily
+        -> To apply user input validation,  import ReactiveFormsModule in app.module.ts
+        -> Form Builder (class)
+           properties : -> Form Group, Form Array , Form Controller
+
+        11: Create Backend ----- Note in BackEnd
+        12 : Register integration
+
+            ->Create services folder
+                     ng g s services/api
+        -> import HttpClientModule in app.module.ts
+             -> In api service , create an API call
+        -> create register function in register.ts
+        
+
+
+      13: PDF Convert
+
+        npm install jspdf --save
+        npm install jspdf jspdf-autotable
+
+        14: parent child communication
+
+               parent- dashboard
+               child-   delete-account
+               @Input
+
+         15: Child to parent communication
+
+            child -delete-account
+            parent-dashboard
+            @Output()
+
+         16: Event generation
+            -> Userdefined Event generation - Event_name= new Event Emitter()
+            ->emit() - used to emit a value

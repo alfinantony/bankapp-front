@@ -1,0 +1,9 @@
+button:hover{
+    border: 1px solid blanchedalmond;
+    box-shadow: 2px 4px 6px;
+}
+
+a{
+    text-decoration: none;
+}
+

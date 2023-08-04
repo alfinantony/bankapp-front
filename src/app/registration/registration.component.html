@@ -1,0 +1,108 @@
+<nav class="navbar"  class="  text-white p-3" style="background-color: #0a4275;">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">
+      <img src="https://w7.pngwing.com/pngs/98/991/png-transparent-computer-icons-bank-icon-design-screenshot-bank-blue-angle-logo.png" alt="Logo" width="60" height="50" class="d-inline-block align-text-top">
+      HSFC Bank
+    </a>
+  </div>
+</nav>
+
+
+
+<div *ngIf="regSuccessMsg" class="container text-center m-5">
+  <h3>
+    Your Data is loading............Please wait...!
+    <img src="https://media.tenor.com/kxZxwvPdm-wAAAAC/loading-loading-screen.gif" alt="">
+    
+  </h3>
+</div>
+
+
+
+
+<div *ngIf="!regSuccessMsg" class="container">
+  <div class="row">
+    <div class="col-6">
+      <!-- image -->
+      <img height="530px" width="600px"
+        src="https://media.istockphoto.com/id/1223604108/vector/business-contract-signing-corporate-document-agreement-checking-data-protection-terms-and.jpg?s=612x612&w=0&k=20&c=R4P1z0amosUQkvn8l4Xh-T-NLaw8uvs6vfbGgANslQU="
+        alt="">
+    </div>
+    <div class="col-6">
+      <!-- Register Form-->
+      <form [formGroup]="registerForm" class="border rounded shadow p-5 m-5">
+        <h3 class="text-center text-primary">Register here</h3>
+
+        <div class="form-floating mb-3">
+          <input type="text" name="username" formControlName="username" class="form-control"
+            placeholder="Account Holder">
+
+          <div *ngIf="this.registerForm.get('username')?.errors && this.registerForm.get('username')?.touched"
+            class="text-danger">Invalid username</div>
+
+          <label>Account Holder</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="text" name="acno" formControlName="acno" class="form-control" id="floatingInput"
+            placeholder="Account Number:4589894556">
+          <div *ngIf="this.registerForm.get('acno')?.errors && this.registerForm.get('acno')?.touched"
+            class="text-danger">Invalid Account number</div>
+
+          <label for="floatingInput">Account Number</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" name="password" formControlName="password" class="form-control" id="floatingPassword"
+            placeholder="Password">
+          <div *ngIf="this.registerForm.get('password')?.errors && this.registerForm.get('password')?.touched"
+            class="text-danger">Invalid Password</div>
+
+          <label for="floatingPassword">Password</label>
+        </div>
+        <!-- register error message -->
+        <div class="text-danger fw-bolder mt-3">
+          {{regErrorMsg}}
+        </div>
+
+        <div class="d-grid my-4">
+          <button type="submit" (click)="register()" class="btn btn-primary">Sign Up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- footer -->
+
+
+<section class="">
+  <!-- Footer -->
+  <footer class="text-center text-white" style="background-color: #0a4275;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: CTA -->
+      <section class="">
+        <p class="d-flex justify-content-center align-items-center">
+          <span class="me-3">Please Login Here</span>
+          <button routerLink="/" type="button" class="btn btn-outline-light btn-rounded">
+            Sign In
+          </button>
+        </p>
+      </section>
+      <!-- Section: CTA -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2023 Copyright:
+      <a class="text-white" href="#">HSFC.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</section>

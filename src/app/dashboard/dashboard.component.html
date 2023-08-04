@@ -1,0 +1,204 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand text-light" routerLink="/">
+      <img
+        src="https://w7.pngwing.com/pngs/98/991/png-transparent-computer-icons-bank-icon-design-screenshot-bank-blue-angle-logo.png"
+        alt="Logo" width="60" height="50" class="d-inline-block align-text-top">
+      HSFC Bank
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown" class="me-5 d-flex justify-content-end">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="me-5 nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Services
+          </a>
+          <ul class="dropdown-menu">
+            <li><a (click)="getBalance()" data-bs-toggle="offcanvas" href="#offcanvasExample" class="dropdown-item" ><i class="fa-solid fa-money-check fa-fade"></i>Balance Enquiry</a>
+            </li>
+            <li><a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="dropdown-item"><i class="fa-solid fa-coins fa-fade"></i>Fund Transfer</a></li>
+            <li><a routerLink="/transaction" class="dropdown-item" ><i class="fa-sharp fa-solid fa-pen-to-square fa-fade"></i>Transaction
+                History</a></li>
+            <li><a (click)="deleteAccount()"  class="dropdown-item"><i class="fa-solid fa-trash"></i>Remove Account</a></li>
+            <li><a (click)="logout()" class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- delete-account -->
+
+<app-delete-account (onDelete)="deleteAccountFromParent()" (onCancel)="cancelDeleteConfirm()" [deleteAcno]="acno"></app-delete-account>
+
+<!-- logout loading -->
+<div *ngIf="logoutStatus" class="text-center" style="width: 100%; height: 500px;">
+ <h1 style="margin-top: 250px;">Please wait...... 
+  <br> While your are logging Out.........</h1>
+</div>
+
+<!-- off canvas -->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Balance Enquiry</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      <!-- img -->
+        <img width="100%" src="https://cdn.dribbble.com/users/500242/screenshots/3672858/bh-advisor-dribbble.gif" class="rounded-circle" alt="" >
+        <h3 class="text-center mt-2">Welcome {{user}}</h3>
+        <p class="text-center mt-2">Your Current Balance is : <span class="text-danger">₹ {{balance}}</span> </p>
+      </div>
+      </div>
+</div>
+
+
+
+<!-- Modal  for fund transfer-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Fund Transfer</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="text-center">
+          <img  width="100%" height="300px" class="p-4" src="https://i.pinimg.com/564x/0c/86/f6/0c86f6f423719012645bc66ae103fcd6.jpg" alt="">
+        </div>
+
+
+            <form [formGroup]="FundTransfer">
+              <!-- credit account number -->
+              <div class="form-floating mb-3">
+                <input formControlName="creditAcno" name="creditAcno" type="text" class="form-control" id="floatingInput" placeholder="Credit Account Number">
+                <label for="floatingInput">Credit Account Number</label>
+                <!-- errormessage -->
+              <div *ngIf="this.FundTransfer.get('creditAcno')?.errors && this.FundTransfer.get('creditAcno')?.touched" class="text-danger">Invalid Account number</div>
+              </div>
+
+              
+
+              <!-- User password -->
+              <div class="form-floating">
+                <input formControlName="password" name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+              <!-- errormessage -->
+              <div *ngIf="this.FundTransfer.get('password')?.errors && this.FundTransfer.get('password')?.touched" class="text-danger">Invalid Password</div>
+
+              </div>
+              <!-- Amount  -->
+              <div class="form-floating mt-3">
+                <input formControlName="amount" name="amount" type="text" class="form-control" id="floatingAmount" placeholder="Amount">
+                <label for="floatingAmount">Amount</label>
+              <!-- errormessage -->
+              <div *ngIf="this.FundTransfer.get('amount')?.errors && this.FundTransfer.get('amount')?.touched" class="text-danger">Invalid data</div>
+  
+              </div>
+            </form>
+      </div>
+
+      <div class="text-center text-success fw-bolder my-2 "> 
+      <!-- successful msg -->
+      {{this.transferSuccessMessage}}
+      </div>
+
+      <div class="text-center text-danger fw-bolder my-2 ">
+        <!-- error message -->
+        {{this.transferErrorMessage}}
+      </div>
+
+      <div class="modal-footer d-flex ">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="fundTransfer()">Transfer</button>
+        <button type="button" class="btn btn-danger"  (click)="closeFundTransfer()">Reset</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard Content -->
+
+
+<div *ngIf="!logoutStatus && !deleteConfirmStatus" class="container">
+
+  <marquee class="blink">The Important  note for the day. Please use the link which seen in the bank app ☺️</marquee>
+
+  <div class="row">
+    <div class="col-4">
+      <!-- content -->
+      <h1 class="mt-3">Welcome {{user}}</h1>
+      <p style="text-align: justify;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia repellat modi
+        quo error eligendi quae cum distinctio enim veritatis nulla iste voluptatum, quibusdam delectus voluptates
+        aperiam neque dicta nostrum excepturi?
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae error esse vero est quidem doloribus, dolorem
+        earum consequuntur ut, quos architecto consectetur quaerat adipisci commodi deleniti. Consequatur architecto
+        saepe odio!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae quo unde ipsam veritatis ea, repellendus hic, odit
+        cumque dolor provident molestiae quam alias corrupti autem ducimus quis, laudantium quasi placeat?
+        
+      </p>
+
+      <div class="collapse" id="collapseExample" style="text-align: justify;">
+       <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae error esse vero est quidem doloribus, dolorem
+        earum consequuntur ut, quos architecto consectetur quaerat adipisci commodi deleniti. Consequatur architecto
+        saepe odio!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae quo unde ipsam veritatis ea, repellendus hic, odit
+        cumque dolor provident molestiae quam alias corrupti autem ducimus quis, laudantium quasi placeat?</p>
+      </div>
+
+
+      <button (click)="collaps()" data-bs-toggle="collapse" data-bs-target="#collapseExample" class="btn btn-primary"> Read 
+        <span *ngIf="isCollaps">More</span> 
+        <span *ngIf="!isCollaps">less</span>
+      </button>
+    </div>
+    <div class="col-8">
+      <!-- image -->
+      <img
+        src="https://img.freepik.com/premium-photo/dashpay-system-cryptocurrency-fast-transactions-digital-crypto-coin-dash-pay-terminal-crypto-pay-via-phone-background-3d-rendering_195742-756.jpg?w=1060"
+        alt="">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- footer -->
+
+
+<section class="">
+  <!-- Footer -->
+  <footer class="text-center text-white" style="background-color: #0a4275;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: CTA -->
+      <section class="">
+        <p class="d-flex justify-content-center align-items-center">
+         
+        </p>
+      </section>
+      <!-- Section: CTA -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2023 Copyright:
+      <a class="text-white" href="#">HSFC.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</section>

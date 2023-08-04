@@ -1,0 +1,96 @@
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light" routerLink="/">
+        <img
+          src="https://w7.pngwing.com/pngs/98/991/png-transparent-computer-icons-bank-icon-design-screenshot-bank-blue-angle-logo.png"
+          alt="Logo" width="60" height="50" class="d-inline-block align-text-top">
+        HSFC Bank
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+         
+     
+    </div>
+  </nav>
+
+
+<!-- content -->
+
+<div class="container">
+  <h1 class="text-center text-primary my-3">Transaction History</h1>
+  <p style="text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium deleniti corrupti rerum temporibus numquam quod perspiciatis doloribus alias repellendus repudiandae? Harum nisi similique aspernatur laborum voluptate iure sed, ex modi.
+  Consectetur minima necessitatibus laborum aspernatur nulla aperiam dignissimos nobis debitis incidunt similique. Rerum corrupti voluptas reiciendis cupiditate eos quia praesentium, quas, vitae obcaecati excepturi totam nemo natus incidunt velit! Saepe!</p>
+
+<div class="row">
+    <div class="col-4">
+    <h3 class="text-center">All Transaction Details</h3>
+    </div>
+    <div class="col-6">
+    <input [(ngModel)]="searchTerm" type="text" width="50px"  placeholder="Search" class="form-control">
+    </div>
+    <div class="col-2">
+    <button (click)="generatePdf()" style="float: right;" class="btn btn-primary">Export</button>
+    </div>
+</div>
+
+<!-- Table -->
+
+<div class="row">
+
+  <table class="border border-2 border-black my-4 text-center">
+    <thead>
+      <tr class="border border-1 border-black">
+        <th class="border border-1 border-black">No.</th>
+        <th class="border border-1 border-black">Type</th>
+        <th class="border border-1 border-black">From Account Number</th>
+        <th class="border border-1 border-black">To Account Number</th>
+        <th class="border border-1 border-black">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trans of transaction | search:searchTerm:'type' let i=index ">
+        <td class="border border-1 border-black">{{i+1}}</td>
+        <td class="border border-1 border-black">{{trans.type}}</td>
+        <td class="border border-1 border-black">{{trans.fromAcno}}</td>
+        <td class="border border-1 border-black">{{trans.toAcno}}</td>
+        <td class="border border-1 border-black">{{trans.amount}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+<!-- footer -->
+
+
+
+
+<section class="">
+    <!-- Footer -->
+    <footer class="text-center text-white" style="background-color: #0a4275;">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: CTA -->
+        <section class="">
+          <p class="d-flex justify-content-center align-items-center">
+            
+          </p>
+        </section>
+        <!-- Section: CTA -->
+      </div>
+      <!-- Grid container -->
+  
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyright:
+        <a class="text-white" href="#">HSFC.com</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+  </section>
